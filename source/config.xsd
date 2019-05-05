@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Config" nillable="true" type="Configuration" />
+  <xs:complexType name="Configuration">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionString" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DatabaseType" type="ConfigDatabaseType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LogSql" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Statements" type="ArrayOfConfigStatement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ConfigDatabaseType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="SQLServer" />
+      <xs:enumeration value="Oracle" />
+      <xs:enumeration value="OLEDB" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfConfigStatement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Statement" nillable="true" type="ConfigStatement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConfigStatement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ID" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="StatementType" type="ConfigStatementType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Parameters" type="ArrayOfConfigParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ConfigStatementType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Text" />
+      <xs:enumeration value="StoredProcedure" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfConfigParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Parameter" nillable="true" type="ConfigParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConfigParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="ConfigParameterType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ConfigParameterType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Byte" />
+      <xs:enumeration value="Int16" />
+      <xs:enumeration value="Int32" />
+      <xs:enumeration value="Int64" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="Boolean" />
+      <xs:enumeration value="DateTime" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Guid" />
+      <xs:enumeration value="Decimal" />
+      <xs:enumeration value="ByteArray" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
